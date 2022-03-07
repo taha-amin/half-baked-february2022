@@ -17,23 +17,23 @@ let totalGuesses = 0;
 
 shedButton.addEventListener('click', () => {
     // get a random item to call the 'correct spot'
-    getRandomHidingSpot();
+    let correctSpot = getRandomHidingSpot();
     // call the handleGuess function with the correct parameters (the user's guess and the "correct" hiding place) to do DOM work
-    handleGuess(0);
+    handleGuess('shed', correctSpot);
 });
 
 treeButton.addEventListener('click', () => {
     // get a random item to call the 'correct spot'
-    getRandomHidingSpot();
+    let correctSpot = getRandomHidingSpot();
     // call the handleGuess function with the correct parameters (the user's guess and the "correct" hiding place) to do DOM work
-    handleGuess(1);
+    handleGuess('tree', correctSpot);
 });
 
 boulderButton.addEventListener('click', () => {
     // get a random item to call the 'correct spot'
-    getRandomHidingSpot();
+    let correctSpot = getRandomHidingSpot();
     // call the handleGuess function with the correct parameters (the user's guess and the "correct" hiding place) to do DOM work
-    handleGuess(2);
+    handleGuess('boulder', correctSpot);
 });
 
 
@@ -50,29 +50,38 @@ function getRandomHidingSpot() {
     // use the random index above and the array of hidingPlaces to get a random hiding place string
 
     // return that random hiding place string
+
+    console.log(hidingPlaces[index]);
+    return hidingPlaces[index];
 }
 
 function handleGuess(userGuess, correctSpot) {
     // first, right after clicking, we need to remove the emoji face from the previous hiding place that way we don't end up with more than one emoji face
 
     // we can do that by removing the .face class from all containers
-
-    shedContainer.src = 'assets/shed.png';
-    treeContainer.src = 'assets/tree.webp';
-    boulderContainer.src = 'assets/boulder.png';
+    shedContainer.classList.remove('face');
+    treeContainer.classList.remove('face');
+    boulderContainer.classList.remove('face');
 
     // then increment the guesses
     totalGuesses++;
+
     // then use getElementById and the correctSpot string to grab the appropriate container from the DOM
+    // then add the .face css class to that element so that the face shows up
+    const correctImgEl = document.getElementById(`${correctSpot}-container`);
+    correctImgEl.classList.add('face');
 
     
-    // then add the .face css class to that element so that the face shows up
-
     // then if the user guess is correct, increment the correct guesses
+    const numberBetweenZeroAndThree = Math.floor(Math.random() * 3);
+
+    if (numberBetweenZeroAndThree === correctSpot) {
+        correctGuesses++;
+    }
+
+    // update the DOM to show the new value of wins, losses and total guesses to the user
 
     winsEl.textContent = correctGuesses;
     totalEl.textContent = totalGuesses;
     lossesEl.textContent = totalGuesses - correctGuesses;
-
-    // update the DOM to show the new value of wins, losses and total guesses to the user
 }
