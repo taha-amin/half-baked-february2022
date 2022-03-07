@@ -17,20 +17,23 @@ let totalGuesses = 0;
 
 shedButton.addEventListener('click', () => {
     // get a random item to call the 'correct spot'
-
+    getRandomHidingSpot();
     // call the handleGuess function with the correct parameters (the user's guess and the "correct" hiding place) to do DOM work
+    handleGuess(0);
 });
 
 treeButton.addEventListener('click', () => {
     // get a random item to call the 'correct spot'
-
+    getRandomHidingSpot();
     // call the handleGuess function with the correct parameters (the user's guess and the "correct" hiding place) to do DOM work
+    handleGuess(1);
 });
 
 boulderButton.addEventListener('click', () => {
     // get a random item to call the 'correct spot'
-
+    getRandomHidingSpot();
     // call the handleGuess function with the correct parameters (the user's guess and the "correct" hiding place) to do DOM work
+    handleGuess(2);
 });
 
 
@@ -50,17 +53,26 @@ function getRandomHidingSpot() {
 }
 
 function handleGuess(userGuess, correctSpot) {
-    // first, right after clicking, we need to remove the emoiji face from the previous hiding place that way we don't end up with more than one emoji face
+    // first, right after clicking, we need to remove the emoji face from the previous hiding place that way we don't end up with more than one emoji face
 
     // we can do that by removing the .face class from all containers
 
-    // then increment the guesses
+    shedContainer.src = 'assets/shed.png';
+    treeContainer.src = 'assets/tree.webp';
+    boulderContainer.src = 'assets/boulder.png';
 
+    // then increment the guesses
+    totalGuesses++;
     // then use getElementById and the correctSpot string to grab the appropriate container from the DOM
 
+    
     // then add the .face css class to that element so that the face shows up
 
     // then if the user guess is correct, increment the correct guesses
+
+    winsEl.textContent = correctGuesses;
+    totalEl.textContent = totalGuesses;
+    lossesEl.textContent = totalGuesses - correctGuesses;
 
     // update the DOM to show the new value of wins, losses and total guesses to the user
 }
