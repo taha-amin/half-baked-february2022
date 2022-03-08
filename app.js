@@ -36,7 +36,6 @@ boulderButton.addEventListener('click', () => {
     handleGuess('boulder', correctSpot);
 });
 
-
 function getRandomHidingSpot() {
     // initialize state
     const hidingPlaces = [
@@ -45,19 +44,16 @@ function getRandomHidingSpot() {
         'boulder'
     ];
 
+    // use the random index above and the array of hidingPlaces to get a random hiding place string
     const index = Math.floor(Math.random() * hidingPlaces.length);
 
-    // use the random index above and the array of hidingPlaces to get a random hiding place string
-
     // return that random hiding place string
-
-    console.log(hidingPlaces[index]);
+    //console.log(hidingPlaces[index]);
     return hidingPlaces[index];
 }
 
 function handleGuess(userGuess, correctSpot) {
     // first, right after clicking, we need to remove the emoji face from the previous hiding place that way we don't end up with more than one emoji face
-
     // we can do that by removing the .face class from all containers
     shedContainer.classList.remove('face');
     treeContainer.classList.remove('face');
@@ -70,18 +66,15 @@ function handleGuess(userGuess, correctSpot) {
     // then add the .face css class to that element so that the face shows up
     const correctImgEl = document.getElementById(`${correctSpot}-container`);
     correctImgEl.classList.add('face');
-
     
     // then if the user guess is correct, increment the correct guesses
-    const numberBetweenZeroAndThree = Math.floor(Math.random() * 3);
-
-    if (numberBetweenZeroAndThree === correctSpot) {
+    if (userGuess === correctSpot) {
         correctGuesses++;
     }
-
-    // update the DOM to show the new value of wins, losses and total guesses to the user
 
     winsEl.textContent = correctGuesses;
     totalEl.textContent = totalGuesses;
     lossesEl.textContent = totalGuesses - correctGuesses;
+
+    // update the DOM to show the new value of wins, losses and total guesses to the user
 }
